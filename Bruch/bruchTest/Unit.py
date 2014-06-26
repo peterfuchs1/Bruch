@@ -72,6 +72,11 @@ class Test(unittest.TestCase):
         str1="(3/2)"
         assert(str(self.b)==str1)
         
+    def teststr2(self):
+        b2=Bruch(-3,-2) 
+        str1="(3/2)"
+        assert(str(b2)==str1)
+ 
     def testradd(self):
         self.b2=3+Bruch(3,2)
         assert(self.b2.eval()==4.5)
@@ -135,6 +140,107 @@ class Test(unittest.TestCase):
     def testInteger(self):
         self.b2=Bruch(3,1)
         assert(str(self.b2)=='(3)')
+    
+    def testPow(self):
+        h=4
+        assert(self.b2**h==Bruch(self.b2.zaehler**h,self.b2.nenner**h))
+        
+    def testPowError1(self):
+        self.assertRaises(TypeError, self.b2.__pow__,2.0)
+
+    def testPowError2(self):
+        self.assertRaises(TypeError, self.b2.__pow__,"other")
+
+    
+    def testEqual(self):
+        assert(self.b==self.b2)
+    
+    def testNotEqual(self):
+        assert(self.b!=self.b3)
+        
+    def testGE(self):
+        assert(self.b>=self.b2)
+
+    def testLE(self):
+        assert(self.b<=self.b2)
+        
+    def testLT(self):
+        assert(self.b<self.b3)
+    
+    def testGT(self):
+        assert(self.b3>self.b2)
+    
+    def test_makeBruchTypeError(self):
+        self.assertRaises(TypeError, Bruch._makeBruch,"other")
+
+    def test_makeBruchInt(self):
+        value=3
+        b4=Bruch._makeBruch(value)
+        assert(b4.zaehler==value)
+
+    def testAbs(self):
+        b4=Bruch(-3,2)
+        assert(abs(b4)==Bruch(3,2))
+
+    def testNeg(self):
+        b4=Bruch(-3,2)
+        assert(-b4==Bruch(3,2))
+        
+    # test of references
+    def testRef(self):
+        assert(self.b is not self.b2)
+        
+    def testRef2(self):
+        b4=self.b
+        assert(self.b is b4)
+        
+
+    # test of inplace operators    
+    def testiAdd(self):
+        self.b+=1
+        assert(self.b==Bruch(5,2))
+    
+    def testiAdd2(self):
+        self.b+=Bruch(1)
+        assert(self.b==Bruch(5,2))
+
+    def testiSub(self):
+        self.b-=2
+        assert(self.b==Bruch(-1,2))
+    
+    def testiSub2(self):
+        self.b-=Bruch(2)
+        assert(self.b==Bruch(-1,2))
+
+    def testiMul(self):
+        self.b*=2
+        assert(self.b==3)
+    
+    def testiMul2(self):
+        self.b*=Bruch(2)
+        assert(self.b==3)
+
+    def testiDiv(self):
+        self.b/=2
+        assert(self.b==Bruch(3,4))
+    
+    def testiDiv2(self):
+        self.b/=Bruch(2)
+        assert(self.b==Bruch(3,4))
+
+
+    def testiAddError(self):
+        self.assertRaises(TypeError, self.b.__iadd__,"other")
+
+    def testiSubError(self):
+        self.assertRaises(TypeError, self.b.__isub__,"other")
+
+    def testiMulError(self):
+        self.assertRaises(TypeError, self.b.__imul__,"other")
+        
+    def testiDivError(self):
+        self.assertRaises(TypeError, self.b.__itruediv__,"other")
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
