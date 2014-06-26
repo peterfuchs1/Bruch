@@ -216,34 +216,39 @@ class Bruch(object):
         return Bruch(abs(self.zaehler),abs(self.nenner))
     #################################
     # Overload inplace operators
+    # to raise a TypeError if necessary
     #################################
     def __iadd__(self,other):
         other=Bruch._makeBruch(other)
-        self.zaehler,self.nenner=self+other
+        self=self+other
         return self
     
     def __isub__(self,other):
         other=Bruch._makeBruch(other)
-        self.zaehler,self.nenner=self-other
+        self=self-other
         return self
     
     def __imul__(self,other):
         other=Bruch._makeBruch(other)
-        self.zaehler,self.nenner=self*other
+        self=self*other
         return self
     
     def __itruediv__(self,other):
         other=Bruch._makeBruch(other)
-        self.zaehler,self.nenner=self/other
+        self=self/other
         return self
     
     @staticmethod
     def gcd(x,y):
         '''
         Euklidscher Algorithmus
+        Initialisierung
         '''
         x,y=abs(x),abs(y) # positive Werte!!
         if x<y: x,y=y,x
-        if y==0: return x
-        return Bruch.gcd(y,x%y) 
-pass
+        '''
+        Berechnung
+        ''' 
+        while y != 0:
+            x,y = y,x%y
+        return x
