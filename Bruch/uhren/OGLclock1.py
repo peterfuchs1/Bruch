@@ -9,7 +9,9 @@ import pygame, sys, math, datetime
 from pygame.locals import *
 #from pygame import *
 class MyClock:
-
+    '''
+    MyClock is a OpenGL analog clock
+    '''
     def __init__(self, analog=True):
     # Attribute
         self.analog=analog # Soll der Sokundenzeiger analog dargestellt werden?
@@ -162,9 +164,18 @@ class MyClock:
         glEnd()
     def clockRotate(self, second, micro, start, stop, rotation):
         x, y, z = rotation
+        
         clockRotation = (second - start +
                          micro/1000000.0)/(stop-start)*360.0
         # new handling for Lighting
+        glEnable(GL_LIGHTING)
+        glLightfv(GL_LIGHT0, GL_AMBIENT, [0.1, 0.1, 0.1, 1.0])
+        glLightfv(GL_LIGHT0, GL_DIFFUSE, [0.9, 0.9, 0.9, 1.0])
+        glLightfv(GL_LIGHT0, GL_POSITION, [0.0, 0.0, -6.0, 1.0])
+        glEnable(GL_LIGHT0)
+        glEnable(GL_COLOR_MATERIAL)
+        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
+        glEnable(GL_NORMALIZE)
         if 90 < clockRotation < 270:
             # invert the normal vector
             glNormal3f(0.0, 0.0, +1.0)
@@ -184,14 +195,7 @@ class MyClock:
         glLoadIdentity()
         glTranslatef(2.0, 2.0, 3.0)
         
-        glEnable(GL_LIGHTING)
-        glLightfv(GL_LIGHT0, GL_AMBIENT, [0.1, 0.1, 0.1, 1.0])
-        glLightfv(GL_LIGHT0, GL_DIFFUSE, [0.9, 0.9, 0.9, 1.0])
-        glLightfv(GL_LIGHT0, GL_POSITION, [0.0, 0.0, -6.0, 1.0])
-        glEnable(GL_LIGHT0)
-        glEnable(GL_COLOR_MATERIAL)
-        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
-        glEnable(GL_NORMALIZE)
+       
         
         glNormal3f(0.0, 0.0, -1.0)
         if 0 <= second <= 10:
@@ -201,9 +205,8 @@ class MyClock:
         
     # Drehung der Uhr
         if second >= 58:
-            self.clockRotate(second, micro, 60.0,62.0, (1.0, 0.0, 0.0))
-        elif 28 <= second <= 30:
-            self.clockRotate(second, micro, 30.0,32.0, (0.0, 1.0, 0.0))
+            self.clockRotate(second, micro, 58.0,60.0, (1.0, 0.0, 0.0))
+      
         # Zeichnen der Uhr
         self.drawClockFace()
         self.drawCurrentTime(hour, minute, second, micro)
@@ -226,84 +229,7 @@ class MyClock:
             inner = not inner
             glVertex3f(x, y, depth)
         glEnd()
-       
-    def getCursorPositionDegrees(self, position, scale):
-# 12 Uhr entspricht -90 Grad
-        cursorOffset = -90
-        degrees = 360 / scale * position + cursorOffset
-        return degrees
 
-    def gradToBogenmass(self, degrees):
-# python bietet auch die Funktion math.radians(degrees),
-# welche die Umrechnung genauso ausfuehrt, aber so wird
-# der Sachverhalt deutlicher
-        return degrees/180.0*math.pi
-
-'''
-    def getCirclePoint(self, position, scale, cursorLength):
-        degrees = self.getCursorPositionDegrees(position, scale)
-        bogenmass = self.gradToBogenmass(degrees)
-        xPos = round(math.cos(bogenmass)*cursorLength+self.windowCenter[0])
-        yPos = round(math.sin(bogenmass)*cursorLength+self.windowCenter[1])
-        return (xPos, yPos)
-
-    def handleEvents(self):
-        for event in pygame.event.get():
-            if event.type in (pygame.QUIT, pygame.KEYDOWN, pygame.MOUSEBUTTONDOWN):
-                sys.exit(0)
-
-    def drawBackground(self):
-        self.screen.fill(self.backgroundColor)
-        pygame.draw.ellipse(self.screen, self.clockMarginColor, (self.windowMargin,\
-                self.windowMargin, self.windowWidth-2*self.windowMargin,\
-                self.windowWidth-2*self.windowMargin))
-        pygame.draw.ellipse(self.screen, self.clockBackgroundColor,\
-                        (self.windowMargin+self.clockMarginWidth/2,\
-                         self.windowMargin+self.clockMarginWidth/2,\
-                         self.windowWidth-(self.windowMargin+self.clockMarginWidth/2)*2,\
-                         self.windowWidth-(self.windowMargin+self.clockMarginWidth/2)*2))
-        # paint the quator and the 5minute-ticks
-        for i in range (0,60,1):
-            start=self.getCirclePoint(i, 60, self.radius)
-            length=self.oneMinuteTicks
-            if i%15==0:
-                length=self.quatorTicks
-            elif i%5==0:
-                length=self.fiveMinuteTicks
-                
-            self.drawCursor(self.ticksColor, 5, length,i, 60,start)
-
-
-        
-    def drawForeground(self):
-        pygame.draw.ellipse(self.screen, self.clockMarginColor,\
-                        (self.windowWidth/2.0-9, self.windowHeight/2.0-9, 18, 18))
-
-    def drawCursor(self,color, width, length, position, scale, start=0):
-        start =(start if start!=0 else self.windowCenter)
-        end = self.getCirclePoint(position, scale, length)
-        pygame.draw.line(self.screen, color, start, end, width)
-        
-
-    hour = 0
-    minute = 0
-    second = 0
-    micro = 0
-    def timeGoesOn(self):
-        global hour, minute, second, micro
-        micro += self.virtualSpeed
-        if micro >= 2: # halve seconds - not micro seconds
-            second += 1
-            micro %= 2
-        if second > 60:
-            minute += 1
-            second %= 60
-        if minute > 60:
-            hour += 1
-            minute %= 60
-        if hour > 12:
-            hour %= 12    
-'''
 
 if __name__ == '__main__':
     MyClock(analog=False)
