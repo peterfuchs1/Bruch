@@ -87,7 +87,11 @@ class GPXConversion:
             lon = lon.strip()
     
             fout.write("\n<wpt lat=\"%s\" lon=\"%s\"" % (lat, lon))
-            if any((name != None,sym != None, ele != None)):
+            '''
+                name or sym or ele is not None
+            '''
+            additionalDataAvailable=(name ,sym , ele)
+            if any(additionalDataAvailable):
                 fout.write(">\n");
                 if name != None:
                     fout.write("    <name>%s</name>\n" % (name))

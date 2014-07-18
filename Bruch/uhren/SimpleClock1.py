@@ -3,8 +3,9 @@ Created on 07.07.2014
 
 @author: uhs374h
 '''
-import pygame, sys, math, datetime
-#from pygame import *
+import sys, math, datetime
+import pygame
+
 class MyClock:
 
     def __init__(self, analog=True):
@@ -33,7 +34,8 @@ class MyClock:
         self.useVirtualTimer = False
     
     #Initialisierung des Screens
-        pygame.init()    
+        pygame.init()
+ 
         self.screen = pygame.display.set_mode(
             (self.windowWidth, self.windowHeight)
             , pygame.HWSURFACE | pygame.DOUBLEBUF)

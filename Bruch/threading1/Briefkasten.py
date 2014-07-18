@@ -37,7 +37,7 @@ class Mathematiker(threading.Thread):
         return "prim" 
  
  
-meine_threads = [Mathematiker() for i in range(5)] 
+meine_threads = (Mathematiker() for i in range(5)) 
 for thread in meine_threads: 
     thread.setDaemon(True) 
     thread.start() 
