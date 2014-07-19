@@ -130,7 +130,7 @@ class MyClock:
         glColor4f(0.3, 0.7, 0.2, 1.0)
         self.drawPointer(0.20, 1.0, hour+(minute/60.0), 12)
         glColor4f(0.3, 0.9, 0.5, 1.0)
-        self.drawPointer(0.15, 2.0, minute+(second/60.0), 60)
+        self.drawPointer(0.15, 1.8, minute+(second/60.0), 60)
         glColor4f(0.8, 0.4, 0.8, 1.0)
         showSecond=(second+micro/1000000.0 if self.analog else second)
         self.drawPointer(0.08, 2.0, showSecond, 60)
