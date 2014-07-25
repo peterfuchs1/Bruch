@@ -11,13 +11,13 @@ class Bruch(object):
     nenner int
     '''
     def __iter__(self):
-        # make our class iterable
+        ''' make our class iterable ''' 
         self.count = 0
         self.liste = (self.zaehler,self.nenner)  
         return self
 
     def __next__(self):
-        # receive the next value
+        ''' receive the next value ''' 
         if self.count == len(self.liste):
             raise StopIteration
         self.count +=1
@@ -40,7 +40,7 @@ class Bruch(object):
         self.nenner=nenner
             
     def __neg__(self):
-        ## -Bruch
+        ''' -Bruch '''
         return Bruch(-self.zaehler,self.nenner)
     
     def __radd__(self,zaehler):
@@ -154,14 +154,13 @@ class Bruch(object):
         
     def __str__(self):
         '''
-        Vor der Ausgabe wir gekuerzt!
+        String Repraesentation
         '''
+        # Vor der Ausgabe wird gekuerzt!
         shorten=Bruch.gcd(self.zaehler, self.nenner)
         self.zaehler//=shorten
         self.nenner//=shorten
-        '''
-        Nenner stehts positiv
-        '''
+        # Nenner stehts positiv
         if self.nenner<0:
             self.nenner*=-1
             self.zaehler*=-1
@@ -170,8 +169,9 @@ class Bruch(object):
             return "({:d})".format(self.zaehler)
         else:    
             return "({:d}/{:d})".format(self.zaehler, self.nenner)
-    @staticmethod    
+    @classmethod    
     def _makeBruch(other):
+        '''create a Bruch from int or return the reference'''
         if isinstance(other, Bruch):
             return other
         elif type(other) is int:
@@ -183,72 +183,73 @@ class Bruch(object):
     # Overload the logical operators
     #################################    
     def __eq__ (self, other):
-        # ==        
+        '''override == '''        
         other=Bruch._makeBruch(other)
         return self.zaehler*other.nenner == other.zaehler*self.nenner
     
     def __ne__ (self, other):
-        # !=        
+        '''override !='''        
         return not self.__eq__(other)
 
     def __gt__ (self, other):
-        # >        
+        '''override >'''        
         other=Bruch._makeBruch(other)
         return self.zaehler*other.nenner > other.zaehler*self.nenner
     
     def __lt__ (self, other):
-        # <        
+        '''override <'''         
         other=Bruch._makeBruch(other)
         return self.zaehler*other.nenner < other.zaehler*self.nenner
     
     def __ge__ (self, other):
-        # >=        
+        '''override >='''        
         other=Bruch._makeBruch(other)
         return self.zaehler*other.nenner >= other.zaehler*self.nenner
     
     def __le__ (self, other):
-        # <=        
+        '''override <='''        
         other=Bruch._makeBruch(other)
         return self.zaehler*other.nenner <= other.zaehler*self.nenner
 
     def __abs__(self):
-        # abs(Bruch)
+        '''override abs(Bruch)'''
         return Bruch(abs(self.zaehler),abs(self.nenner))
     #################################
     # Overload inplace operators
     # to raise a TypeError if necessary
     #################################
     def __iadd__(self,other):
+        '''override +='''
         other=Bruch._makeBruch(other)
         self=self+other
         return self
     
     def __isub__(self,other):
+        '''override -='''
         other=Bruch._makeBruch(other)
         self=self-other
         return self
     
     def __imul__(self,other):
+        '''override *='''
         other=Bruch._makeBruch(other)
         self=self*other
         return self
     
     def __itruediv__(self,other):
+        '''override /='''
         other=Bruch._makeBruch(other)
         self=self/other
         return self
     
-    @staticmethod
+    @classmethod
     def gcd(x,y):
         '''
         Euklidscher Algorithmus
-        Initialisierung
         '''
         x,y=abs(x),abs(y) # positive Werte!!
         if x<y: x,y=y,x
-        '''
-        Berechnung
-        ''' 
+        #Berechnung 
         while y != 0:
             x,y = y,x%y
         return x
