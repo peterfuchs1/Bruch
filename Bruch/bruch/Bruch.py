@@ -151,7 +151,7 @@ class Bruch(object):
         real=self.zaehler/self.nenner
         return real
     #----------------------------------------------------------------------        
-    def __str__(self):
+    def __repr__(self):
         '''
         String Repraesentation
         '''
@@ -170,7 +170,7 @@ class Bruch(object):
             return "({:d}/{:d})".format(self.zaehler, self.nenner)
     #----------------------------------------------------------------------
     @classmethod    
-    def _makeBruch(other):
+    def _makeBruch(cls,other):
         '''create a Bruch from int or return the reference'''
         if isinstance(other, Bruch):
             return other
@@ -243,7 +243,7 @@ class Bruch(object):
         return self
     #----------------------------------------------------------------------    
     @classmethod
-    def gcd(x,y):
+    def gcd(cls,x,y):
         '''
         Euklidscher Algorithmus
         '''

@@ -15,6 +15,8 @@ if __name__ == '__main__':
     b3=3+b1+Bruch(1,4)
     b4=3/b3+3
     b3+=Bruch(3,2)
+    b0=Bruch(4,3)
+    print(str(b1)+" == invert "+str(b0),b1== ~b0 )
     b3=-b3
     print(b3 is not b2)
     b5=Bruch(b3.zaehler,b3.nenner)
