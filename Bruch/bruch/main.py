@@ -36,11 +36,11 @@ if __name__ == '__main__':
 
 #        print(str(b[x])
     for x in range(len(b)):
-        print (str(b[x])+"="+str(b[x].eval())
-               +((", gt "+str(b1)) if (b[x]>b1) else "")
-               +((", ge "+str(b1)) if (b[x]>=b1) else "")
-               +((", lt "+str(b1)) if (b[x]<b1) else "")
-               +((", le "+str(b1)) if (b[x]<=b1) else "")
-               +((", == "+str(b1)) if (b[x]==b1) else "")
-               +((", != "+str(b1)) if (b[x]!=b1) else ""))    
-pass
+        print (b[x],"= "+str(b[x].eval())+
+               ("; gt %s" %b1 if b[x]>b1 else '')+
+               ("; ge %s" %b1 if b[x]>=b1 else '')+
+               ("; lt %s" %b1 if b[x]<b1 else '')+
+               ("; le %s" %b1 if b[x]<=b1 else '')+
+               ("; eq %s" %b1 if b[x]==b1 else '')+
+               ("; ne %s" %b1 if b[x]!=b1 else ''))
+        
