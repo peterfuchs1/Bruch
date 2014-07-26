@@ -13,7 +13,7 @@ if __name__ == '__main__':
 # Wir erzeugen einen Turtle
     turty=MyTurtle()
 # Der Turtle wartet auf uns
-    turty.delay = 0.1
+    turty.delay = 0.4
 
 # Die Laenge betraegt 100 Punkte
     laenge = 100
@@ -35,7 +35,26 @@ if __name__ == '__main__':
     turty.lt(45)
     turty.move(laenge)
     turty.lt(90)
-    turty.move(2*laenge)
+# Bitte eine Ture    
+    turty.move(laenge*0.4)
+    turty.rectangle(laenge*0.2,laenge*0.6)
+    
+# linkes Fenster
+    turty.move(-laenge*0.3)
+    turty.lt()
+    turty.move(laenge*0.4)
+    turty.lt(-90)
+    turty.square(laenge*0.2)
+    
+# ein zweites Fenster
+    turty.move(laenge*0.6)    
+    turty.square(laenge*0.2)
+
+# wir gehen nun ins Freie    
+    turty.lt(-90)
+    turty.move(laenge*0.4)
+    turty.lt()
+    turty.move(laenge)
     turty.lt(90)
 # Wir zeichnen einen Baum
 # Zuerst der Stamm
