@@ -17,16 +17,17 @@ if __name__ == '__main__':
     b3+=Bruch(3,2)
     b0=Bruch(4,3)
     print(str(b1)+" == invert "+str(b0),b1== ~b0 )
+    print(b3)
     b3=-b3
     print(b3 is not b2)
     b5=Bruch(b3.zaehler,b3.nenner)
     print(b3 is b5)
     b4=4*b4-Bruch(2,4)-b3**2
-    print(str(b1)+'='+str(b1.eval()))
-    print(str(b2)+'='+str(b2.eval()))
-    print(str(b3)+'='+str(b3.eval()))
-    print(str(b4)+'='+str(b4.eval()))
-    print("abs"+str(b4)+" = "+str(abs(b4)))
+    print(b1,'=',b1.eval())
+    print(b2,'=',b2.eval())
+    print(b3,'=',b3.eval())
+    print(b4,'=',b4.eval())
+    print("abs",b4,"=",abs(b4))
     b=[]
     for x in range(0, 1000):
         z=randint(0,50)

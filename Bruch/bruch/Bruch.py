@@ -165,9 +165,11 @@ class Bruch(object):
             self.zaehler*=-1
             
         if self.nenner==1:
-            return "({:d})".format(self.zaehler)
-        else:    
-            return "({:d}/{:d})".format(self.zaehler, self.nenner)
+            return "(%d)" % self.zaehler
+            #return "({:d})".format(self.zaehler)
+        else:
+            return "(%d/%d)" % (self.zaehler, self.nenner)
+            #return "({:d}/{:d})".format(self.zaehler, self.nenner)
     #----------------------------------------------------------------------
     @classmethod    
     def _makeBruch(cls,other):
