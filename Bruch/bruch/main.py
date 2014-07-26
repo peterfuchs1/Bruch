@@ -28,19 +28,24 @@ if __name__ == '__main__':
     print(b3,'=',b3.eval())
     print(b4,'=',b4.eval())
     print("abs",b4,"=",abs(b4))
+#----------------------------------------------
+# Initialisierung 1000 Elemente
+#----------------------------------------------
     b=[]
     for x in range(0, 1000):
         z=randint(0,50)
         n=randint(1,50)
         b.append(Bruch(z,n))
-
-#        print(str(b[x])
+#----------------------------------------------
+# Ausgabe und Vergleich mit b1 (3/4)
+#----------------------------------------------
     for x in range(len(b)):
-        print (b[x],"= "+str(b[x].eval())+
-               ("; gt %s" %b1 if b[x]>b1 else '')+
-               ("; ge %s" %b1 if b[x]>=b1 else '')+
-               ("; lt %s" %b1 if b[x]<b1 else '')+
-               ("; le %s" %b1 if b[x]<=b1 else '')+
-               ("; eq %s" %b1 if b[x]==b1 else '')+
-               ("; ne %s" %b1 if b[x]!=b1 else ''))
+        z=b[x]
+        print (z,"= "+str(z.eval())+
+               ("; gt %s" %b1 if z>b1 else '')+
+               ("; ge %s" %b1 if z>=b1 else '')+
+               ("; lt %s" %b1 if z<b1 else '')+
+               ("; le %s" %b1 if z<=b1 else '')+
+               ("; eq %s" %b1 if z==b1 else '')+
+               ("; ne %s" %b1 if z!=b1 else ''))
         
