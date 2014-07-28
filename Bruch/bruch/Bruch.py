@@ -38,6 +38,10 @@ class Bruch(object):
             raise ZeroDivisionError
         self.zaehler=zaehler
         self.nenner=nenner
+    #----------------------------------------------------------------------
+    def __float__(self):
+        """override float()"""
+        return self.eval()
     #----------------------------------------------------------------------            
     def __neg__(self):
         ''' -Bruch '''
@@ -145,11 +149,8 @@ class Bruch(object):
         
     #----------------------------------------------------------------------
     def eval(self):
-        '''
-        evaluate
-        '''
-        real=self.zaehler/self.nenner
-        return real
+        ''' evaluate a float representation'''
+        return self.zaehler/self.nenner
     #----------------------------------------------------------------------        
     def __repr__(self):
         '''

@@ -65,6 +65,7 @@ if __name__ == '__main__':
         turty.fd(baum)
         turty.move(-baum)
         turty.lt(-20)
+# Der Stamm wird nun dicker
     turty.lt(-170)
     turty.fd(-3)
     turty.rectangle(6,baum)
