@@ -41,7 +41,11 @@ class Bruch(object):
     #----------------------------------------------------------------------
     def __float__(self):
         """override float()"""
-        return self.eval()
+        return self.zaehler/self.nenner
+    #----------------------------------------------------------------------
+    def __int__(self):
+        """override int()"""
+        return int(self.__float__())    
     #----------------------------------------------------------------------            
     def __neg__(self):
         ''' -Bruch '''
@@ -66,6 +70,10 @@ class Bruch(object):
         nennerNeu=self.nenner*n2
         zaehlerNeu=z2*self.nenner+n2*self.zaehler
         return Bruch(zaehlerNeu,nennerNeu)
+    #----------------------------------------------------------------------
+    def __complex__(self):
+        """override complex()"""
+        return self.__float__()
     #----------------------------------------------------------------------    
     def __rsub__(self,left):
         '''
@@ -173,7 +181,7 @@ class Bruch(object):
             #return "({:d}/{:d})".format(self.zaehler, self.nenner)
     #----------------------------------------------------------------------
     @classmethod    
-    def _makeBruch(cls,other):
+    def __makeBruch(cls,other):
         '''create a Bruch from int or return the reference'''
         if isinstance(other, Bruch):
             return other
@@ -187,7 +195,7 @@ class Bruch(object):
     #################################    
     def __eq__ (self, other):
         '''override == '''        
-        other=Bruch._makeBruch(other)
+        other=Bruch.__makeBruch(other)
         return self.zaehler*other.nenner == other.zaehler*self.nenner
     #----------------------------------------------------------------------    
     def __ne__ (self, other):
@@ -196,22 +204,22 @@ class Bruch(object):
     #----------------------------------------------------------------------
     def __gt__ (self, other):
         '''override >'''        
-        other=Bruch._makeBruch(other)
+        other=Bruch.__makeBruch(other)
         return self.zaehler*other.nenner > other.zaehler*self.nenner
     #----------------------------------------------------------------------    
     def __lt__ (self, other):
         '''override <'''         
-        other=Bruch._makeBruch(other)
+        other=Bruch.__makeBruch(other)
         return self.zaehler*other.nenner < other.zaehler*self.nenner
     #----------------------------------------------------------------------    
     def __ge__ (self, other):
         '''override >='''        
-        other=Bruch._makeBruch(other)
+        other=Bruch.__makeBruch(other)
         return self.zaehler*other.nenner >= other.zaehler*self.nenner
     #----------------------------------------------------------------------    
     def __le__ (self, other):
         '''override <='''        
-        other=Bruch._makeBruch(other)
+        other=Bruch.__makeBruch(other)
         return self.zaehler*other.nenner <= other.zaehler*self.nenner
     #----------------------------------------------------------------------
     def __abs__(self):
@@ -223,25 +231,25 @@ class Bruch(object):
     #################################
     def __iadd__(self,other):
         '''override +='''
-        other=Bruch._makeBruch(other)
+        other=Bruch.__makeBruch(other)
         self=self+other
         return self
     #----------------------------------------------------------------------    
     def __isub__(self,other):
         '''override -='''
-        other=Bruch._makeBruch(other)
+        other=Bruch.__makeBruch(other)
         self=self-other
         return self
     #----------------------------------------------------------------------    
     def __imul__(self,other):
         '''override *='''
-        other=Bruch._makeBruch(other)
+        other=Bruch.__makeBruch(other)
         self=self*other
         return self
     #----------------------------------------------------------------------    
     def __itruediv__(self,other):
         '''override /='''
-        other=Bruch._makeBruch(other)
+        other=Bruch.__makeBruch(other)
         self=self/other
         return self
     #----------------------------------------------------------------------    

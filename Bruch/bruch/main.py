@@ -23,10 +23,13 @@ if __name__ == '__main__':
     b5=Bruch(b3.zaehler,b3.nenner)
     print(b3 is b5)
     b4=4*b4-Bruch(2,4)-b3**2
-    print(b1,'=',b1.eval())
-    print(b2,'=',b2.eval())
-    print(b3,'=',b3.eval())
-    print(b4,'=',b4.eval())
+    print(b1,'=',float(b1))
+    s1=hex(int(b1))
+    s2=oct(int(b1))
+    i1=int(b1)
+    print(b2,'=',float(b2))
+    print(b3,'=',float(b3))
+    print(b4,'=',float(b4))
     print("abs",b4,"=",abs(b4))
 #----------------------------------------------
 # Initialisierung 1000 Elemente
@@ -41,7 +44,7 @@ if __name__ == '__main__':
 #----------------------------------------------
     for x in range(len(b)):
         z=b[x]
-        print (z,"= "+str(z.eval())+
+        print (z,"= "+str(float(z))+
                ("; gt %s" %b1 if z>b1 else '')+
                ("; ge %s" %b1 if z>=b1 else '')+
                ("; lt %s" %b1 if z<b1 else '')+
