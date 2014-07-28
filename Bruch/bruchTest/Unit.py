@@ -171,11 +171,11 @@ class Test(unittest.TestCase):
         assert(self.b3>self.b2)
     
     def test_makeBruchTypeError(self):
-        self.assertRaises(TypeError, Bruch._makeBruch,"other")
+        self.assertRaises(TypeError, Bruch._Bruch__makeBruch,"other")
 
     def test_makeBruchInt(self):
         value=3
-        b4=Bruch._makeBruch(value)
+        b4=Bruch._Bruch__makeBruch(value)
         assert(b4.zaehler==value)
 
     def testAbs(self):

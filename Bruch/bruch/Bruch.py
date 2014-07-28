@@ -180,8 +180,8 @@ class Bruch(object):
             return "(%d/%d)" % (self.zaehler, self.nenner)
             #return "({:d}/{:d})".format(self.zaehler, self.nenner)
     #----------------------------------------------------------------------
-    @classmethod    
-    def __makeBruch(cls,other):
+    # @staticmethod # not necessary in python 3.x    
+    def __makeBruch(other):
         '''create a Bruch from int or return the reference'''
         if isinstance(other, Bruch):
             return other
