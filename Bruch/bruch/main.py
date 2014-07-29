@@ -24,13 +24,13 @@ if __name__ == '__main__':
     print(b3 is b5)
     b4=4*b4-Bruch(2,4)-b3**2
     print(b1,'=',float(b1))
-    s1=hex(int(b1))
-    s2=oct(int(b1))
-    i1=int(b1)
+    print(hex(int(b1+123)))
+    print(oct(int(b1+123)))
+    print(int(b1+123))
     print(b2,'=',float(b2))
     print(b3,'=',float(b3))
     print(b4,'=',float(b4))
-    print("abs",b4,"=",abs(b4))
+    print("abs%s ="%(b4),abs(b4))
 #----------------------------------------------
 # Initialisierung 1000 Elemente
 #----------------------------------------------
