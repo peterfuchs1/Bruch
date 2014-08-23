@@ -4,6 +4,7 @@ Created on 27.12.2013
 @author: uhs374h
 '''
 import unittest
+#import bruch.Bruch import Bruch
 from bruch.Bruch import Bruch
 
 class Test(unittest.TestCase):
@@ -241,6 +242,22 @@ class Test(unittest.TestCase):
     def testiDivError(self):
         self.assertRaises(TypeError, self.b.__itruediv__,"other")
 
+    def testFloat(self):
+        b=Bruch(3,4)
+        assert(float(b)==0.75)
+
+    def testInt(self):
+        b=Bruch(5,4)
+        assert(int(b)==1)
+
+    def testComplex(self):
+        b=Bruch(3,4)
+        assert(complex(b)==0.75)
+
+    def testInvert(self):
+        z,n=5,4
+        b=Bruch(z,n)
+        assert(~b==Bruch(n,z))
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
