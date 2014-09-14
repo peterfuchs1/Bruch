@@ -38,3 +38,8 @@ emp1.displayEmployee()
 emp2.displayEmployee()
 # Ausgabe der Anzahl aller Mitarbeiter
 print ("Total Employee %d" % Employee.empCount)
+# Mit Attributen waehrend der Laufzeit arbeiten:
+hasattr(emp1, 'age')    # True, falls das Attribut 'age' existiert
+setattr(emp1, 'age', 8) # Setter fuer das Attribut 'age'
+getattr(emp1, 'age')    # Getter fuer das Attribut 'age'
+delattr(emp1, 'age')    # Das Attribute 'age' wird geloescht!
