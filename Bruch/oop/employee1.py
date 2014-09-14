@@ -10,8 +10,8 @@ class Employee(object):
         :param name: Name des Mitarbeiters
         :param salary: Gehalt des Mitarbeiters
         """
-        self.name = name
-        self.salary = salary
+        self.name = name        # Objektattribut
+        self.salary = salary    # Objektattribut
         Employee.empCount += 1
     @staticmethod
     def displayCount():
