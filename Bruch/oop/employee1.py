@@ -31,7 +31,7 @@ class Employee(object):
 
 # Unser erstes Objekt der Klasse
 emp1 = Employee("Andrea", 2000)
-# Das wir unser zweites Objekt
+# Das wird unser zweites Objekt
 emp2 = Employee("Franziska", 5000)
 # Ausgabe der Mitarbeiter
 emp1.displayEmployee()
