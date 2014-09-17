@@ -6,7 +6,7 @@ Created on 27.12.2013
 import unittest
 #import bruch.Bruch import Bruch
 #from bruch.Bruch import Bruch
-from Bruch import Bruch
+from Bruch.bruch.Bruch import Bruch
 class Test(unittest.TestCase):
 
 
@@ -22,52 +22,52 @@ class Test(unittest.TestCase):
 
     def testdiv(self):
         self.b=self.b/Bruch(4)
-        assert(self.b.eval()==0.375)
+        assert(float(self.b)==0.375)
 
     def testmal(self):
         self.b=self.b*Bruch(4)
-        assert(self.b.eval()==6)
+        assert(float(self.b)==6)
 
     def testplus(self):
         self.b=self.b+Bruch(4,5)
-        assert(self.b.eval()==2.3)
+        assert(float(self.b)==2.3)
 
     def testminus(self):
         self.b=self.b-Bruch(4,5)
-        assert(self.b.eval()==0.7)
+        assert(float(self.b)==0.7)
 
 
     def testdiv2(self):
         self.b=self.b/self.b3
-        assert(self.b.eval()==0.75)
+        assert(float(self.b)==0.75)
 
     def testmal2(self):
         self.b=self.b*self.b2
-        assert(self.b.eval()==2.25)
+        assert(float(self.b)==2.25)
 
     def testplus2(self):
         self.b=self.b+self.b3
-        assert(self.b.eval()==3.5)
+        assert(float(self.b)==3.5)
 
     def testminus2(self):
         self.b=self.b-self.b3
-        assert(self.b.eval()==-0.5)
+        assert(float(self.b)==-0.5)
 
     def testplus3(self):
         self.b2=self.b+3
-        assert(self.b2.eval()==4.5)
+        assert(float(self.b2)==4.5)
 
     def testminus3(self):
         self.b2=self.b-Bruch(1)
-        assert(self.b2.eval()==0.5)
+        assert(float(self.b2)==0.5)
     
     def testmal3(self):
         self.b2=self.b*2
-        assert(self.b2.eval()==3)
+        assert(float(self.b2)==3)
         
     def testdiv3(self):
         self.b2=self.b/2
-        assert(self.b2.eval()==0.75)
+        assert(float(self.b2)==0.75)
         
     def teststr(self):
         str1="(3/2)"
@@ -80,15 +80,15 @@ class Test(unittest.TestCase):
  
     def testradd(self):
         self.b2=3+Bruch(3,2)
-        assert(self.b2.eval()==4.5)
+        assert(float(self.b2)==4.5)
 
     def testrmal(self):
         self.b2=2*Bruch(3,2)
-        assert(self.b2.eval()==3)
+        assert(float(self.b2)==3)
         
     def testrsub(self):
         self.b2=3-Bruch(3,2)
-        assert(self.b2.eval()==1.5)
+        assert(float(self.b2)==1.5)
 
     def testrdivError(self):
 #        self.b2=32.0/self.b2
@@ -102,7 +102,7 @@ class Test(unittest.TestCase):
 
     def testrdiv(self):
         self.b2=2/Bruch(2)
-        assert(self.b2.eval()==1)
+        assert(float(self.b2)==1)
 
     def testmulError(self):
 #        self.b2=2.0*Bruch(2)

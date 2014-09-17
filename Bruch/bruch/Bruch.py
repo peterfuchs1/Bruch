@@ -3,30 +3,29 @@ Created on 27.12.2013
 
 @author: uhs374h
 '''
+from __future__ import division, print_function, unicode_literals
 
 class Bruch(object):
-    '''
-    classdocs
-    zaehler int
-    nenner int
-    '''
+    """
+    Bruch
+
+    :param int zaehler: numerator
+    :param int nenner: denominator
+    :ivar int zaehler: numerator
+    :ivar int nenner: denominator
+    """
     def __iter__(self):
-        ''' make our class iterable ''' 
-        self.count = 0
-        self.liste = (self.zaehler,self.nenner)  
-        return self
-    #----------------------------------------------------------------------
-    def __next__(self):
-        ''' receive the next value ''' 
-        if self.count == len(self.liste):
-            raise StopIteration
-        self.count +=1
-        return self.liste[self.count - 1]
-    #----------------------------------------------------------------------
-    def __init__(self, zaehler,nenner=1):
-        '''
-        Constructor
-        '''
+        """
+        make our class iterable
+        """
+        return (self.zaehler,self.nenner).__iter__()
+    def __init__(self, zaehler=0,nenner=1):
+        """
+        constructor
+
+        :param zaehler: Bruch or int
+        :param nenner: int - not zero
+        """
         if isinstance(zaehler, Bruch):
             self.zaehler,self.nenner=zaehler
             return
@@ -40,27 +39,45 @@ class Bruch(object):
         self.nenner=nenner
     #----------------------------------------------------------------------
     def __float__(self):
-        """override float()"""
+        """
+        overrides float()
+
+        :return: float
+        """
         return self.zaehler/self.nenner
     #----------------------------------------------------------------------
     def __int__(self):
-        """override int()"""
+        """
+        overrides int()
+
+        :return: int
+        """
         return int(self.__float__())    
     #----------------------------------------------------------------------            
     def __neg__(self):
-        ''' -Bruch '''
+        """
+        negation
+
+        :return: Bruch
+        """
         return Bruch(-self.zaehler,self.nenner)
     #----------------------------------------------------------------------    
     def __radd__(self,zaehler):
-        '''
-        the r-version
-        '''
+        """
+        right version of add
+
+        :param zaehler: int or Bruch
+        :return: Bruch
+        """
         return self.__add__(zaehler)
     #----------------------------------------------------------------------
     def __add__(self,zaehler):
-        '''
-        overloading +
-        '''
+        """
+        add
+
+        :param zaehler: int or Bruch
+        :return: Bruch
+        """
         if isinstance(zaehler, Bruch):
             z2,n2=zaehler
         elif type(zaehler) is int:
@@ -72,13 +89,20 @@ class Bruch(object):
         return Bruch(zaehlerNeu,nennerNeu)
     #----------------------------------------------------------------------
     def __complex__(self):
-        """override complex()"""
+        """
+        overrides complex()
+
+        :return: float
+        """
         return self.__float__()
     #----------------------------------------------------------------------    
     def __rsub__(self,left):
-        '''
-        the r-version
-        '''
+        """
+        right version of sub
+
+        :param zaehler: int or Bruch
+        :return: Bruch
+        """
         if type(left) is int:
             z2=left        
             nennerNeu=self.nenner
@@ -89,21 +113,30 @@ class Bruch(object):
             
     #----------------------------------------------------------------------            
     def __sub__(self,zaehler):
-        '''
-        overloading -
-        '''
+        """
+        sub
+
+        :param zaehler: int or Bruch
+        :return: Bruch
+        """
         return self.__add__(zaehler*-1)
     #----------------------------------------------------------------------
     def __rmul__(self,zaehler):
-        '''
-        the r-version
-        '''
+        """
+        right version of mul
+
+        :param zaehler: int or Bruch
+        :return: Bruch
+        """
         return self.__mul__(zaehler)
     #----------------------------------------------------------------------    
     def __mul__(self,zaehler):
-        '''
-        overloading *
-        '''
+        """
+        mul
+
+        :param zaehler: int or Bruch
+        :return: Bruch
+        """
         if isinstance(zaehler, Bruch):
             z2,n2=zaehler
         elif type(zaehler) is int:
@@ -115,19 +148,34 @@ class Bruch(object):
         return Bruch(z2,n2)
     #----------------------------------------------------------------------
     def __pow__(self,p):
-        '''
-        Bruch()^p
-        '''
+        """
+        Bruch power to self
+
+        :param int p: power
+        :return: Bruch
+        """
         if type(p) is int:
             return Bruch(self.zaehler**p,self.nenner**p)
         else:
             raise TypeError('incompatible types:'+type(p).__name__+' should be an int')
              
     #----------------------------------------------------------------------    
+    def __rdiv__(self, other):
+        """
+        right version of division for python 2.x
+
+        :param zaehler: int or Bruch
+        :return: Bruch
+        """
+        return self.__rtruediv__(other)
+    #----------------------------------------------------------------------
     def __rtruediv__(self,left):
-        '''
-        the r-version
-        '''
+        """
+        right version of div for python >= 3.x
+
+        :param zaehler: int or Bruch
+        :return: Bruch
+        """
         if type(left) is int:
             z2=left*self.nenner
             if self.zaehler==0:
@@ -136,11 +184,22 @@ class Bruch(object):
         else:
             raise TypeError('incompatible types:'+type(left).__name__+' / Bruch()')
         
-    #----------------------------------------------------------------------        
+    #----------------------------------------------------------------------
+    def __div__(self, other):
+        """
+        division for python 2.x
+
+        :param other: int or Bruch
+        :return: Bruch
+        """
+        return self.__truediv__(other)
     def __truediv__(self,zaehler):
-        '''
-        overloading /
-        '''
+        """
+        division python >= 3.x
+
+        :param zaehler: Bruch or int
+        :return: Bruch
+        """
         if isinstance(zaehler, Bruch):
             z2,n2=zaehler
         elif type(zaehler) is int:
@@ -152,18 +211,20 @@ class Bruch(object):
         return self.__mul__(Bruch(n2,z2))    
     #----------------------------------------------------------------------
     def __invert__(self):
-        """override ~ and invert the bruch"""
+        """
+        invert a Bruch ~
+
+        :return: Bruch
+        """
         return Bruch(self.nenner,self.zaehler)
         
-    #----------------------------------------------------------------------
-    def eval(self):
-        ''' evaluate a float representation'''
-        return self.zaehler/self.nenner
-    #----------------------------------------------------------------------        
+    #----------------------------------------------------------------------    #----------------------------------------------------------------------
     def __repr__(self):
-        '''
-        String Repraesentation
-        '''
+        """
+        representation of the Bruch object
+
+        :return str: the representation
+        """
         # Vor der Ausgabe wird gekuerzt!
         shorten=Bruch.gcd(self.zaehler, self.nenner)
         self.zaehler//=shorten
@@ -180,8 +241,14 @@ class Bruch(object):
             return "(%d/%d)" % (self.zaehler, self.nenner)
             #return "({:d}/{:d})".format(self.zaehler, self.nenner)
     #----------------------------------------------------------------------
-    # @staticmethod # not necessary in python 3.x    
+    @staticmethod # not necessary in python >= 3.x
     def __makeBruch(other):
+        """
+        make a Bruch for sure
+
+        :param other: Bruch or int
+        :return: Bruch
+        """
         '''create a Bruch from int or return the reference'''
         if isinstance(other, Bruch):
             return other
@@ -190,74 +257,136 @@ class Bruch(object):
             return b
         else:
             raise TypeError('incompatible types:'+type(other).__name__+' not an int nor a Bruch')
-    #################################
-    # Overload the logical operators
-    #################################    
+    #----------------------------------------------------------------------
     def __eq__ (self, other):
-        '''override == '''        
+        """
+        equal to
+
+        :param Bruch other: other Bruch
+        :return: boolean
+        """
         other=Bruch.__makeBruch(other)
         return self.zaehler*other.nenner == other.zaehler*self.nenner
     #----------------------------------------------------------------------    
     def __ne__ (self, other):
-        '''override !='''        
+        """
+        not equal to
+
+        :param Bruch other: other Bruch
+        :return: boolean
+        """
         return not self.__eq__(other)
     #----------------------------------------------------------------------
     def __gt__ (self, other):
-        '''override >'''        
+        """
+        greather than
+
+        :param Bruch other: other Bruch
+        :return: boolean
+        """
         other=Bruch.__makeBruch(other)
         return self.zaehler*other.nenner > other.zaehler*self.nenner
     #----------------------------------------------------------------------    
     def __lt__ (self, other):
-        '''override <'''         
+        """
+        lower than
+
+        :param Bruch other: other Bruch
+        :return: boolean
+        """
         other=Bruch.__makeBruch(other)
         return self.zaehler*other.nenner < other.zaehler*self.nenner
     #----------------------------------------------------------------------    
     def __ge__ (self, other):
-        '''override >='''        
+        """
+        greather or equal to
+
+        :param Bruch other: other Bruch
+        :return: boolean
+        """
         other=Bruch.__makeBruch(other)
         return self.zaehler*other.nenner >= other.zaehler*self.nenner
     #----------------------------------------------------------------------    
     def __le__ (self, other):
-        '''override <='''        
+        """
+        lower or equal to
+
+        :param Bruch other: other Bruch
+        :return: boolean
+        """
         other=Bruch.__makeBruch(other)
         return self.zaehler*other.nenner <= other.zaehler*self.nenner
     #----------------------------------------------------------------------
     def __abs__(self):
-        '''override abs(Bruch)'''
+        """
+        abs(Bruch)
+
+        :return: positive Bruch
+        """
         return Bruch(abs(self.zaehler),abs(self.nenner))
-    #################################
-    # Overload inplace operators
-    # to raise a TypeError if necessary
-    #################################
+    #----------------------------------------------------------------------
     def __iadd__(self,other):
-        '''override +='''
+        """
+        intern add
+
+        :param Bruch other: Bruch
+        :return: self
+        """
         other=Bruch.__makeBruch(other)
         self=self+other
         return self
     #----------------------------------------------------------------------    
     def __isub__(self,other):
-        '''override -='''
+        """
+        intern sub
+
+        :param Bruch other: Bruch
+        :return: self
+        """
         other=Bruch.__makeBruch(other)
         self=self-other
         return self
     #----------------------------------------------------------------------    
     def __imul__(self,other):
-        '''override *='''
+        """
+        intern mul
+
+        :param Bruch other: other Bruch
+        :return: self
+        """
         other=Bruch.__makeBruch(other)
         self=self*other
         return self
-    #----------------------------------------------------------------------    
+    #----------------------------------------------------------------------
+    def __idiv__(self, other):
+        """
+        intern division 2.x
+
+        :param Bruch other: other Bruch
+        :return: self
+        """
+        return self.__itruediv__(other)
+    #----------------------------------------------------------------------
     def __itruediv__(self,other):
-        '''override /='''
+        """
+        intern division 3.x
+
+        :param Bruch other: other Bruch
+        :return: self
+        """
         other=Bruch.__makeBruch(other)
         self=self/other
         return self
     #----------------------------------------------------------------------    
     @classmethod
     def gcd(cls,x,y):
-        '''
-        Euklidscher Algorithmus
-        '''
+        """
+        euclid's algorithm
+
+        :param int x: first value
+        :param int y: second value
+        :return: greatest common divisor
+        """
         x,y=abs(x),abs(y) # positive Werte!!
         if x<y: x,y=y,x
         #Berechnung 
