@@ -95,9 +95,9 @@ class Bruch(object):
         """
         overrides complex()
 
-        :return: float
+        :return: complex
         """
-        return self.__float__()
+        return complex(self.__float__())
     #----------------------------------------------------------------------    
     def __rsub__(self,left):
         """
