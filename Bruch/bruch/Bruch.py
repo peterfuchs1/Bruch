@@ -23,6 +23,7 @@ class Bruch(object):
         """
         constructor
 
+        :raise TypeError: incompatible types
         :param zaehler: Bruch or int
         :param nenner: int - not zero
         """
@@ -66,6 +67,7 @@ class Bruch(object):
         """
         right version of add
 
+        :raise TypeError: incompatible types
         :param zaehler: int or Bruch
         :return: Bruch
         """
@@ -75,6 +77,7 @@ class Bruch(object):
         """
         add
 
+        :raise TypeError: incompatible types
         :param zaehler: int or Bruch
         :return: Bruch
         """
@@ -100,6 +103,7 @@ class Bruch(object):
         """
         right version of sub
 
+        :raise TypeError: incompatible types
         :param zaehler: int or Bruch
         :return: Bruch
         """
@@ -116,6 +120,7 @@ class Bruch(object):
         """
         sub
 
+        :raise TypeError: incompatible types
         :param zaehler: int or Bruch
         :return: Bruch
         """
@@ -125,6 +130,7 @@ class Bruch(object):
         """
         right version of mul
 
+        :raise TypeError: incompatible types
         :param zaehler: int or Bruch
         :return: Bruch
         """
@@ -134,6 +140,7 @@ class Bruch(object):
         """
         mul
 
+        :raise TypeError: incompatible types
         :param zaehler: int or Bruch
         :return: Bruch
         """
@@ -151,6 +158,7 @@ class Bruch(object):
         """
         Bruch power to self
 
+        :raise TypeError: incompatible types
         :param int p: power
         :return: Bruch
         """
@@ -173,6 +181,7 @@ class Bruch(object):
         """
         right version of div for python >= 3.x
 
+        :raise TypeError: incompatible types
         :param zaehler: int or Bruch
         :return: Bruch
         """
@@ -197,6 +206,7 @@ class Bruch(object):
         """
         division python >= 3.x
 
+        :raise TypeError: incompatible types
         :param zaehler: Bruch or int
         :return: Bruch
         """
@@ -246,6 +256,7 @@ class Bruch(object):
         """
         make a Bruch for sure
 
+        :raise TypeError: incompatible types
         :param other: Bruch or int
         :return: Bruch
         """
